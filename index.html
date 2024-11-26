@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+
+    <link rel="stylesheet" href="./css/main.css">
+
+    <link href='https://fonts.googleapis.com/css?family=DM Serif Display' rel='stylesheet'>
+</head>
+<body>
+
+
+     <!-- Header Section with Background -->
+  <header>
+    <div class="navbar">
+      <!-- Logo on the Left -->
+      <div class="logo">
+        <img src="your-logo.png" alt="Logo">
+      </div>
+      
+      <!-- Navigation Links on the Right -->
+      <div class="nav-links">
+        <a href="#support" class="support-link">Need Help?</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Content Section -->
+  <div class="content">
+    <main class='container'>
+        <div class='slot-machine'>
+          <div class='slots'>
+          </div>
+          <div class='slots'>
+          </div>
+          <div class='slots'>
+          </div>
+        </div>
+        <div class='buttons'>
+          <button class='play-button'>
+            Play
+          </button>
+        </div>
+      </main>
+  </div>
+
+<script>
+
+const numbers = [...Array(10).keys()];
+
+const slotsList = document.querySelectorAll(".slots");
+const playButton = document.querySelector(".play-button");
+
+let seeds = [0, 0, 0];
+let winningNumbers = [0, 0, 0];
+
+const init = () => {
+  slotsList.forEach((slots) => {
+    for (let x = 0; x < numbers.length; x++) {
+      createSlot(slots, x);
+    }
+  });
+};
+
+const createSlot = (parentElement, slotIndex) => {
+  const slot = document.createElement("div");
+  slot.className = "slot slot-" + slotIndex;
+
+  const slotContent = document.createElement("p");
+  slotContent.innerText = slotIndex;
+
+  slot.append(slotContent);
+
+  parentElement.append(slot);
+};
+
+const generateSeed = (index) => {
+  let randomNumber = Math.floor(Math.random() * 1000) + 1;
+  let multipleOf36 = Math.ceil(randomNumber / 36) * 36;
+
+  return seeds[index] - multipleOf36 - 720;
+};
+
+const highlightWinner = (index, winner) => {
+  const slots = slotsList[index].children;
+  for (let i = 0; i < slots.length; i++) {
+    if (i === winner) {
+      slots[i].classList.add("slot-winner");
+    } else {
+      slots[i].classList.add("slot-disabled");
+    }
+  }
+};
+
+const resetSlots = () => {
+  slotsList.forEach((slots) => {
+    const slotChildren = slots.children;
+    for (let i = 0; i < slotChildren.length; i++) {
+      slotChildren[i].classList.remove("slot-winner", "slot-disabled");
+    }
+  });
+};
+
+init();
+
+playButton.addEventListener("click", () => {
+  resetSlots(); // Reset styles before spinning
+
+  slotsList.forEach((slots, slotsIndex) => {
+    seeds[slotsIndex] = generateSeed(slotsIndex);
+    document.documentElement.style.setProperty(
+      `--rotation-${slotsIndex + 1}-final`,
+      `${seeds[slotsIndex]}deg`
+    );
+    slots.style.animation = `spin-${slotsIndex + 1} 5s ease-in-out`;
+
+    slots.style.transform = `rotateX(${seeds[slotsIndex]}deg)`;
+    playButton.disabled = true;
+    playButton.style.cursor = "not-allowed";
+  });
+
+  setTimeout(() => {
+    // Calculate winners after animation
+    winningNumbers = seeds.map(
+      (seed) => Math.abs(seed / 36) % 10 // Get the resulting number
+    );
+    winningNumbers.forEach((winner, index) => highlightWinner(index, winner));
+
+    slotsList.forEach((slots, slotsIndex) => {
+      document.documentElement.style.setProperty(
+        `--rotation-${slotsIndex + 1}-inital`,
+        `${seeds[slotsIndex]}deg`
+      );
+      slots.style.animation = "none";
+    });
+
+    playButton.disabled = false;
+    playButton.style.cursor = "pointer";
+
+    console.log("Winning Numbers:", winningNumbers);
+  }, 5000);
+});
+</script>
+
+    
+</body>
+</html>

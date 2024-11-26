@@ -1,0 +1,225 @@
+/* Reset some default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Set the body and header styles */
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-image: url(../images/banner2.jpg);
+    /* Apply the background-size: cover property */
+  background-size: cover;
+  width: 100%;
+
+  }
+  
+  /* Header background style */
+  header {
+    background: transparent; /* You can use any color or image */
+    padding: 10px 0;
+    position: relative;
+  }
+  
+  /* Navbar styling */
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    position: relative;
+  }
+  
+  /* Logo styling */
+  .logo img {
+    height: 40px;
+  }
+  
+  /* Navigation links */
+  .nav-links {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .nav-links a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 10px;
+    transition: background-color 0.3s ease;
+    
+  }
+  
+
+
+  
+
+  
+  /* Content Styling */
+  .content {
+   margin-top: 50px;
+    padding: 20px;
+    text-align: center;
+    margin-left: 80px;
+    font-family: 'DM Serif Display';
+  }
+
+
+  /* lucky drow started */
+
+  :root {
+    --rotation-1-inital: 0deg;
+    --rotation-1-final: 3600deg;
+    --rotation-2-inital: 0deg;
+    --rotation-2-final: 3600deg;
+    --rotation-3-inital: 0deg;
+    --rotation-3-final: 3600deg;
+  }
+  
+  .container {
+    width: 100%;
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+ 
+  }
+  
+  .slot-machine {
+    display: flex;
+    gap: 16px;
+  }
+  
+  .slots {
+    position: relative;
+    margin: 0 auto;
+    height: 80px;
+    width: 80px;
+    float: left;
+    transform-style: preserve-3d;
+  }
+  
+  .slot {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+    box-sizing: border-box;
+    opacity: 0.9;
+    color: rgba(0, 0, 0, 0.9);
+    background: #f9fafb;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+  
+  .slot p {
+    font-size: 36px;
+    font-weight: bold;
+    line-height: 80px;
+    margin: 0;
+    text-align: center;
+  }
+  
+  .slot-0 {
+    transform: rotateX(0deg) translateZ(150px);
+  }
+  .slot-1 {
+    transform: rotateX(36deg) translateZ(150px);
+  }
+  .slot-2 {
+    transform: rotateX(72deg) translateZ(150px);
+  }
+  .slot-3 {
+    transform: rotateX(108deg) translateZ(150px);
+  }
+  .slot-4 {
+    transform: rotateX(144deg) translateZ(150px);
+  }
+  .slot-5 {
+    transform: rotateX(180deg) translateZ(150px);
+  }
+  .slot-6 {
+    transform: rotateX(216deg) translateZ(150px);
+  }
+  .slot-7 {
+    transform: rotateX(252deg) translateZ(150px);
+  }
+  .slot-8 {
+    transform: rotateX(288deg) translateZ(150px);
+  }
+  .slot-9 {
+    transform: rotateX(324deg) translateZ(150px);
+  }
+  
+  .buttons {
+    position: absolute;
+    bottom: 120px;
+  }
+  
+  .play-button {
+    border: none;
+    outline: none;
+    padding: 15px 50px;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #000;
+    font-size: 16px;
+    font-weight: semibold;
+    cursor: pointer;
+  }
+  
+  .play-button:hover {
+    background-color: #fff;
+    padding: 20px 60px;
+  }
+  
+  @keyframes spin-1 {
+    0% {
+      transform: rotateX(var(--rotation-1-inital));
+    }
+  
+    100% {
+      transform: rotateX(var(--rotation-1-final));
+    }
+  }
+  @keyframes spin-2 {
+    0% {
+      transform: rotateX(var(--rotation-2-inital));
+    }
+  
+    100% {
+      transform: rotateX(var(--rotation-2-final));
+    }
+  }
+  @keyframes spin-3 {
+    0% {
+      transform: rotateX(var(--rotation-3-inital));
+    }
+  
+    100% {
+      transform: rotateX(var(--rotation-3-final));
+    }
+  }
+
+
+
+
+
+  .slot-winner {
+    background-color: #d3344e; /* Green background for winner */
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 0 10px 2px #d3344e;
+  }
+  
+  .slot-disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+
+
+  /*  end lucky drow */
